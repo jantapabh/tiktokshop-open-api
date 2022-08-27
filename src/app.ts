@@ -1,15 +1,25 @@
 import express from "express";
 import { TikTokShopApi } from "./tiktok-shop-api";
+import {
+  TIKTOK_AUTH_URL,
+  APP_KEY,
+  APP_SECRET,
+  SHOP_ID,
+  ACCESS_TOKEN_URL
+} from './config/constant';
 
 const app = express();
 const port = 3001;
 app.get("/", async (req, res) => {
-  const a:any={}
+  const a = {
+    host: '123',
+    app_key: APP_KEY,
+    app_secret: APP_SECRET,
+    shop_id: SHOP_ID
+  }
   const test = TikTokShopApi(a)
-  // console.log(test.getAuthURL());
-  let code  ='6ZS9MwAAAABP40Ddq6cJKLg_BLAIj54JzpaS9-izcy9L_SdTKtFs45hDhX9_blIF_AYXQl9gGMtYUYLLHDapNvkjzsTaFPWL'
-  const token = await test.fetchTokenWithAuthCode(code)
-  res.send(token);
+  const t = test.getAuthURL()
+  res.send(t);
 });
 
 app.listen(port, () => {
