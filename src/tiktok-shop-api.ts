@@ -4,11 +4,14 @@ import * as crypto from "crypto-js";
 import queryString from 'query-string';
 import {
   TIKTOK_AUTH_URL,
+  TIKTOK_END_POINT,
   APP_KEY,
   APP_SECRET,
   SHOP_ID,
   ACCESS_TOKEN_URL
 } from './config/constant';
+
+const endPoint = TIKTOK_END_POINT
 
 export function TikTokShopApi({
   host,
@@ -45,7 +48,7 @@ class _TikTokShopApi {
 
   getAuthURL(): string {
     const state = randomBytes(3).toString('hex');
-    const endPoint = TIKTOK_AUTH_URL
+    const endPointAuth = TIKTOK_AUTH_URL
     const path = '/oauth/authorize?'
     const commonParam = {
       app_key: this.appKey,
@@ -53,7 +56,7 @@ class _TikTokShopApi {
     }
 
     // const commonParam = '?app_key=' + APP_KEY + '&state=' + state
-    return endPoint + path + queryString.stringify(commonParam)
+    return endPointAuth + path + queryString.stringify(commonParam)
   }
   
   async fetchTokenWithAuthCode(code: string) {
@@ -132,5 +135,16 @@ class _TikTokShopApi {
     const signature2 = this.signRequest(params, path, config)
     url.searchParams.set('sign', signature2)
     return url.toString()
+  }
+
+  static commonParameter(config, timestamp) {
+    const { appKey, accessToken, shopId } = config
+    const commonParam = '?app_key=' + appKey +
+      '&access_token=' + accessToken +
+      '&sign=' + '' +
+      '&timestamp=' + timestamp +
+      '&shop_id=' + shopId
+
+    return commonParam
   }
 }
