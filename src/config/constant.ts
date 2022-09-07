@@ -13,6 +13,7 @@ const ACCESS_TOKEN_URL = 'https://auth.tiktok-shops.com/api/token/getAccessToken
 
 export {
     TIKTOK_AUTH_URL,
+    TIKTOK_END_POINT,
     APP_KEY,
     APP_SECRET,
     SHOP_ID,
