@@ -11,14 +11,15 @@ import {
 const app = express();
 const port = 3001;
 app.get("/", async (req, res) => {
-  const a = {
+  const config = {
     host: '123',
     app_key: APP_KEY,
     app_secret: APP_SECRET,
     shop_id: SHOP_ID
   }
-  const test = TikTokShopApi(a)
+  const test = TikTokShopApi(config)
   const t = test.getAuthURL()
+  const q = test.order.getOrderDetail('312312')
   res.send(t);
 });
 

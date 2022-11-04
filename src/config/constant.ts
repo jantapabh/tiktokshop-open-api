@@ -11,11 +11,36 @@ const AUTH_CODE = 'TsBn6gAAAAADpDIQcJKdqJ2Bh4ES6mF3TLX4-aGeE0IzTtsFzc8oYzrbGc1mp
 
 const ACCESS_TOKEN_URL = 'https://auth.tiktok-shops.com/api/token/getAccessToken'
 
+enum PATH {
+    GET_ORDER_LIST = '/api/orders/search',
+    GET_ORDER_DETAIL = '/api/orders/detail/query'
+
+}
+
+enum OrderStatusTiktok {
+    UNPAID = 100,
+    AWAITING_SHIPMENT = 111,
+    AWAITING_COLLECTION = 112,
+    IN_TRANSIT = 121,
+    DELIVERED = 122,
+    COMPLETED = 130,
+    CANCELLED = 140,
+}
+
+const END_POINT = 'https://open-api.tiktokglobalshop.com';
+// const endPoint = 'https://open-api-sandbox.tiktokglobalshop.com'
+const END_POINT_AUTH = 'https://auth.tiktok-shops.com';
+// const endPointAuth = 'https://auth-sandbox.tiktok-shops.com'
+
 export {
     TIKTOK_AUTH_URL,
     TIKTOK_END_POINT,
     APP_KEY,
     APP_SECRET,
     SHOP_ID,
-    ACCESS_TOKEN_URL
+    ACCESS_TOKEN_URL,
+    PATH,
+    OrderStatusTiktok,
+    END_POINT,
+    END_POINT_AUTH
 }

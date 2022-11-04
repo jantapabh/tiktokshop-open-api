@@ -10,21 +10,20 @@ import {
   SHOP_ID,
   ACCESS_TOKEN_URL
 } from './config/constant';
+import { OrderAPI } from './modules/Order';
+import { ProductAPI } from './modules/Product';
 
 const endPoint = TIKTOK_END_POINT
 
-export function TikTokShopApi({
-  host,
-  app_key,
-  app_secret,
-  shop_id
-}: {
+interface configTiktok {
   host: string,
   app_key: string,
   app_secret: string,
   shop_id: string
-}) {
-  return new _TikTokShopApi({ host, app_key, app_secret, shop_id })
+}
+
+export function TikTokShopApi(config: configTiktok) {
+  return new _TikTokShopApi(config)
 }
 
 class _TikTokShopApi {
@@ -32,14 +31,10 @@ class _TikTokShopApi {
   private appKey: string;
   private appSecret: string;
   private shopID: string;
+  public order = new OrderAPI()
+  public product = new ProductAPI()
 
-  constructor({ host, app_key, app_secret, shop_id }:
-    {
-      host: string,
-      app_key: string,
-      app_secret: string,
-      shop_id: string
-    }) {
+  constructor({ host, app_key, app_secret, shop_id }: configTiktok) {
     this.host = host;
     this.appKey = app_key;
     this.appSecret = app_secret;
